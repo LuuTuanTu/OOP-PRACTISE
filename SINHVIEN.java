@@ -1,4 +1,4 @@
-package LAB2;
+package WEEK2;
 
 import java.util.Scanner;
 
@@ -16,27 +16,47 @@ public class SINHVIEN {
     }
     
     public SINHVIEN(int MaSV, String Hoten, double DiemLT, double DiemTH) {
-        if (MaSV > 0) {
-            this.MaSV = MaSV;
-        } else {
-            this.MaSV = 0;
-        }
-        this.Hoten = Hoten;
-        this.DiemLT = DiemLT;
-        this.DiemTH = DiemTH;
+        setMaSV(MaSV);
+        setHoten(Hoten);
+        setDiemLT(DiemLT);
+        setDiemTH(DiemTH);
     }
 
     public int getMaSV() { return MaSV; }
-    public void setMaSV(int maSV) { MaSV = maSV; }
+    public void setMaSV(int maSV) { 
+        if (maSV > 0) {
+            this.MaSV = maSV; 
+        } else {
+            this.MaSV = 0;
+        }
+    }
 
     public String getHoten() { return Hoten; }
-    public void setHoten(String hoten) { Hoten = hoten; }
+    public void setHoten(String hoten) { 
+        if (hoten != null && !hoten.trim().isEmpty()) {
+            this.Hoten = hoten; 
+        } else {
+            this.Hoten = "unknown";
+        }
+    }
 
     public double getDiemLT() { return DiemLT; }
-    public void setDiemLT(double diemLT) { DiemLT = diemLT; }
+    public void setDiemLT(double diemLT) { 
+        if (diemLT >= 0.0 && diemLT <= 10.0) {
+            this.DiemLT = diemLT; 
+        } else {
+            this.DiemLT = 0.0;
+        }
+    }
 
     public double getDiemTH() { return DiemTH; }
-    public void setDiemTH(double diemTH) { DiemTH = diemTH; }
+    public void setDiemTH(double diemTH) { 
+        if (diemTH >= 0.0 && diemTH <= 10.0) {
+            this.DiemTH = diemTH; 
+        } else {
+            this.DiemTH = 0.0;
+        }
+    }
 
     public double DTB() {
         return (DiemLT + DiemTH) / 2;
@@ -44,40 +64,43 @@ public class SINHVIEN {
 
     @Override
     public String toString() {
-        return String.format("%-10d %-20s %-10.2f %-10.2f %-10.2f", 
+        return String.format("%-10d %-25s %-10.2f %-10.2f %-10.2f", 
                 MaSV, Hoten, DiemLT, DiemTH, DTB());
     }
 
     public static void main(String[] args) {
-        SINHVIEN sv1 = new SINHVIEN();
-        Scanner sc = new Scanner(System.in);
+        SINHVIEN sv1 = new SINHVIEN(25635111, "Luu Tuan Tu", 8.5, 9.0);
+        SINHVIEN sv2 = new SINHVIEN(25635112, "Nguyen Van A", 7.0, 8.0);
+        SINHVIEN sv3 = new SINHVIEN();
         
-        System.out.println("=== NHẬP THÔNG TIN SINH VIÊN ===");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("=== NHẬP THÔNG TIN SINH VIÊN 3 ===");
         
         System.out.print("Nhập mã sinh viên: ");
         int ma = sc.nextInt();
-        sv1.setMaSV(ma);
         sc.nextLine();
         
         System.out.print("Nhập họ và tên: ");
         String ten = sc.nextLine();
-        sv1.setHoten(ten);
         
         System.out.print("Nhập điểm lý thuyết: ");
         double lt = sc.nextDouble();
-        sv1.setDiemLT(lt);
-        sc.nextLine();
         
         System.out.print("Nhập điểm thực hành: ");
         double th = sc.nextDouble();
-        sv1.setDiemTH(th);
         
-        System.out.println("\n=== THÔNG TIN VỪA NHẬP ===");
-        System.out.println("Mã SV: " + sv1.getMaSV());
-        System.out.println("Họ tên: " + sv1.getHoten());
-        System.out.println("Điểm LT: " + sv1.getDiemLT());
-        System.out.println("Điểm TH: " + sv1.getDiemTH());
-        System.out.println("Điểm TB: " + sv1.DTB());
+        sv3.setMaSV(ma);
+        sv3.setHoten(ten);
+        sv3.setDiemLT(lt);
+        sv3.setDiemTH(th);
+        
+        System.out.println("\n================================ DANH SÁCH SINH VIÊN ================================");
+        System.out.printf("%-10s %-25s %-10s %-10s %-10s\n", "MSSV", "Họ Tên", "Điểm LT", "Điểm TH", "Điểm TB");
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println(sv1.toString());
+        System.out.println(sv2.toString());
+        System.out.println(sv3.toString());
+        System.out.println("-------------------------------------------------------------------------------------");
 
         sc.close();
     }
