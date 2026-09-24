@@ -1,105 +1,77 @@
-package QLCD;
+package QuanlyCD;
 
 public class CD {
-	/*25635111-LuuTuanTu
-	Tao attribute cho class*/
+	private int maCD;
+	private String nameCD;
+	private int soBai;
+	private double gia;
 	
-	private String MaCD;
-	private String TenCD;
-	private int  Sobai;
-	private double Gia;
-	
-	//Tao Constructor default
+	public static final int default_ma = 99999;
+	public static final String default_name = "unknown";
 	
 	public CD()
 	{
-		MaCD  = "none";
-		TenCD = "none";
-		Sobai = 0;
-		Gia = 0.0;
-	}
-	//GET SET
-
-	public String getMaCD() {
-		return MaCD;
-	}
-
-	public void setMaCD(String maCD) {
-		MaCD = maCD;
-	}
-
-	public String getTenCD() {
-		return TenCD;
-	}
-
-	public void setTenCD(String tenCD) {
-		TenCD = tenCD;
-	}
-
-	public int getSobai(int Sobai) {
-		return Sobai;
-	}
-
-	public void setSobai(int Sobaihat) throws Exception {
-		if(Sobaihat>0)
-		{
-			this.Sobai = Sobaihat;
-		}
-		else {
-			throw new Exception("So bai > 0");
-		}
-		
-	}
-
-	public double getGia() {
-		return Gia;
-	}
-
-	public void setGia(double gia) throws Exception {
-		if(gia>0)
-		{
-			this.Gia = gia;
-		}
-		else {
-			throw new Exception("GIA > 0");
-		}
+		this.maCD = default_ma;
+		this.nameCD = default_name;
+		this.soBai = 1;
+		this.gia = 1.0;
 	}
 	
-	//CONSTRUCTTOR
-	 public CD(String MaCD, String TenCD, int Sobai, double Gia) throws Exception
-	 {
-		 this.MaCD = MaCD;
-		 this.TenCD = TenCD;
-		 if(Sobai>0)
-		 {
-			 this.Sobai = Sobai;
-		 }
-		 else {
-			 throw new Exception("Sobai > 0");
-		 }
-		 if(Gia>0)
-		 {
-			 this.Gia = Gia;
-		 }
-		 else {
-			 throw new Exception("Gia > 0");
-		 }
-	 }
-	 public static void tieude() {
-		 System.out.println("In Danh Sach CD: ");
-		 for(int i = 0; i<100; i++)
-			 System.out.printf("-");
-		 System.out.printf("\n");
-	 }
-	
-	 public static void main(String[] args) {
-		 tieude();
-	 }
-	 
+	public CD(int maCD, String tuaCD, int soBai, double gia)
+	{
+		setMaCD(maCD);
+		setNameCD(tuaCD);
+		setSoBai(soBai);
+		setGia(gia);
+	}
 
+	public int getMaCD() {return maCD;}
+	public String getNameCD() {return nameCD;}
+	public int getSoBai() {return soBai;}
+	public double getGia() {return gia;}
+
+	public void setMaCD(int maCD) {
+		if(maCD <= 0)
+			  throw new IllegalArgumentException("CD>0!");
+		this.maCD = maCD;
+	}
+
+	public void setNameCD(String nameCD) {
+		if (nameCD == null || nameCD.trim().isEmpty())
+			throw new IllegalArgumentException("CD>0!");
+		this.nameCD = nameCD;
+	}
+
+	public void setSoBai(int soBai) {
+		if(soBai<=0)
+			throw new IllegalArgumentException("SoBai>0!");
+		this.soBai = soBai;
+	}
+
+	public void setGia(double gia) {
+		if(gia<0)
+			throw new IllegalArgumentException("GIA>=0!");
+		this.gia = gia;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format(
+			"| %-10d | %-25s | %-12d | %-15.2f |",
+			maCD, nameCD, soBai, gia);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
 	
 	
 }
+
+
